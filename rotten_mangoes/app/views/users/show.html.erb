@@ -1,0 +1,9 @@
+<h2> Overview for <%= @user.full_name %> </h2>
+
+<h3> Reviews </h3>
+<% @user.reviews.each do |review| %>
+    <h3><%= link_to review.movie.title, movie_path(review.movie) %> | <%= formatted_date(review.created_at) %></h3>
+    <p><%= review.text %> - <%= review.rating_out_of_ten %>/10</p>
+<% end %>
+<br>
+<br>

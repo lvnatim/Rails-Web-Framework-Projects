@@ -1,0 +1,24 @@
+<%= link_to "Back to all actors", actors_path %>
+<hr>
+<h3> <%= @actor.name %> (<%= @actor.gender %>) 
+  <small><%= @actor.age %> years old </small>
+  (<%= link_to "Edit", edit_actor_path(@actor) %>)
+</h3>
+<p> <%= @actor.biography %> </p>
+<hr>
+<h4>Featured in:</h4>
+<ul>
+  <% @actor.movies.each do |movie| %>
+    <li><%= link_to movie.title, movie_path(movie) %></li>
+  <% end %>
+</ul>
+<h4>Reviews:</h4>
+<ul>
+  <% @actor.reviews.each do |review| %>
+    <li>
+      <p><%= review.text %> - <%= review.rating_out_of_ten %>/10</p>
+      <em> For the movie: <%= link_to review.movie.title, movie_path(review.movie) %>, by user <%= review.user.full_name %> </em> 
+    </li>
+  <% end %>
+</ul>
+<hr>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RottenMangoes</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="header">
+      <h1> Rotten Mangoes! </h1>
+      <ul style="list-style-type: none;">
+        <li> <%= link_to "Actors", actors_path %> </li>
+        <li> <%= link_to "Movies", movies_path %> </li>
+      </ul>
+    </div>
+    <hr>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value) %>
+    <% end %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>
