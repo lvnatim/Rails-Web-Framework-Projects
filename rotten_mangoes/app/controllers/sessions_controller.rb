@@ -17,4 +17,24 @@ class SessionsController < ApplicationController
     redirect_to movies_path, notice: "Adios!"
   end
 
+  def spoof
+    user = User.find(params[:id])
+    if current_user.is_admin?
+      session[:admin_id] = session[:user_id] 
+      session[:user_id] = user.id
+      redirect_to movies_path
+    else
+      redirect_to movies_path, notice: "Admins only."
+    end
+  end
+
+  def end_spoof
+    if is_spoofing?
+      session[:user_id] = session[:admin_id]
+      session[:admin_id] = nil
+      current_user
+    end
+    redirect_to admin_users_path
+  end
+
 end

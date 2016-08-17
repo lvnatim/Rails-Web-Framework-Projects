@@ -1,17 +1,27 @@
-<%= link_to "Add a movie!", new_movie_path %>
+<%= form_tag movies_path, method: :get do %>
+<!--   <div>
+  <%= label_tag :title %>
+  <%= text_field_tag :title %>
+  </div>
+  <div>
+  <%= label_tag :director %>
+  <%= text_field_tag :director %>
+  </div> -->
+  <div>
+    <%= label_tag :title_or_director %>
+    <%= text_field_tag :title_or_director %>
+  </div>
+  <div>
+  <%= label_tag :runtime_in_minutes %>
+  <%= select_tag :runtime_in_minutes, options_for_select([["", ""], ["Under 90 minutes", 1], ["Between 90 and 120 minutes", 2], ["Over 120 minutes", 3]]) %>
+  </div>
+  <%= submit_tag "Search!" %>
+<% end %>
 <br>
-<br>
+
 Sort by: <%= link_to "Title", "/movies/sort/title" %> | <%= link_to "Runtime", "/movies/sort/runtime_in_minutes" %> | <%= link_to "Release Date", "/movies/sort/release_date" %>
+<p><%= link_to "Add a movie!", new_movie_path %></p>
 <hr>
 <% @movies.each do |movie| %>
-  <% unless movie.poster.file.nil? %>
-    <%= link_to image_tag(movie.poster.url), movie_path(movie) %>
-  <% else %>
-    <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
-  <% end %>
-  <h2><%= link_to movie.title, movie_path(movie) %></h2>
-  <h3><%= formatted_date(movie.release_date) %></h3>
-  <h4> Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes </h4>
-  <p> <%= movie.description %> </p>
-  <hr>
+  <%= render partial: 'movie', locals: {movie: movie} %>
 <% end %>

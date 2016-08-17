@@ -2,7 +2,9 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :reviews
+  paginates_per 10
+
+  has_many :reviews, dependent: :destroy
 
   validates :email,
     presence: true
@@ -13,6 +15,10 @@ class User < ApplicationRecord
 
   def full_name
     "#{firstname} #{lastname}"
+  end
+
+  def is_admin?
+    admin
   end
 
 end

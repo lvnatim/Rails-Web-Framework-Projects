@@ -7,6 +7,18 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    # if params[:title] && !params[:title].empty?
+    #   @movies = @movies.filter_title(params[:title])
+    # end
+    # if params[:director] && !params[:director].empty?
+    #   @movies = @movies.filter_director(params[:director])
+    # end
+    if params[:title_or_director] && !params[:title_or_director].empty?
+      @movies = @movies.filter_title_or_director(params[:title_or_director])
+    end
+    if params[:runtime_in_minutes] && !params[:runtime_in_minutes].empty?
+      @movies = @movies.filter_runtime_in_minutes(params[:runtime_in_minutes])
+    end
   end
 
   def show
@@ -49,6 +61,10 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :director, :runtime_in_minutes, :description, :poster_image_url, :release_date, :poster)
+  end
+
+  def search_params
+    params.permit(:title, :director, :runtime_in_minutes)
   end
 
 end

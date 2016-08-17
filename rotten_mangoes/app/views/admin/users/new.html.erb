@@ -1,0 +1,37 @@
+<h1> ADMIN: Add user! </h1>
+<%= link_to "I don't want to add a user after all", admin_users_path %>
+<br>
+<br>
+<%= form_for @user, url: admin_users_path(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div>
+      <%= pluralize(@user.errors.count, "error")%> prevented the account from being created:
+      <ul>
+        <% @user.errors.full_messages.each do |error| %>
+        <li> <%= error %> </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :firstname %>
+    <%= f.text_field :firstname %>
+  </div>
+  <div>
+    <%= f.label :lastname %>
+    <%= f.text_field :lastname %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div><%= f.submit "Submit" %></div>
+<% end %>

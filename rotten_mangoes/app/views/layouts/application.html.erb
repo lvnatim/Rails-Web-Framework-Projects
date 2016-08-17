@@ -15,9 +15,10 @@
       </ul>
     </div>
     <hr>
-    <% flash.each do |key, value| %>
+    <h1><% flash.each do |key, value| %>
       <%= content_tag(:div, value) %>
-    <% end %>
+      <hr>
+    <% end %></h1>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
