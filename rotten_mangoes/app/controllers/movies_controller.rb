@@ -1,12 +1,20 @@
 class MoviesController < ApplicationController
 
+
+  def add_genre
+    category = Category.find(params[:data_category_id])
+    movie = Movie.find(params[:data_movie_id])
+    movie.categories << category
+    movie.save 
+  end
+
   def sort
-    @movies = Movie.all.order(params[:by].to_sym)
+    @movies = Movie.all.order(params[:by].to_sym).page params[:page]
     render :index
   end
 
   def index
-    @movies = Movie.all
+    @movies = Movie.order(:id).page params[:page]
     # if params[:title] && !params[:title].empty?
     #   @movies = @movies.filter_title(params[:title])
     # end
@@ -23,6 +31,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @categories = Category.all
   end
 
   def new
@@ -40,12 +49,13 @@ class MoviesController < ApplicationController
 
   def edit
     @movie = Movie.find(params[:id])
+    @categories = Category.all
   end
 
   def update
     @movie = Movie.find(params[:id])
-    if @movie.update_attributes(movie_params)
-      redirect_to movie_path(@movie)
+    if @movie.save
+      redirect_to movies_path, notice: "#{@movie.title} was saved successfully!"
     else
       render :edit
     end
@@ -61,6 +71,10 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :director, :runtime_in_minutes, :description, :poster_image_url, :release_date, :poster)
+  end
+
+  def category_params
+    params.require(:categories).permit(:genre)
   end
 
   def search_params

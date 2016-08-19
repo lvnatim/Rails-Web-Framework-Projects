@@ -1,8 +1,11 @@
-<%= link_to "Add an actor!", new_actor_path %>
+<%= render 'hero' %>
+
 <hr>
 <% @actors.each do |actor| %>
-<h3> <%= actor.name %> (<%= actor.gender %>) <small><%= actor.age %> years old </small></h3>
-<p> <%= actor.biography %> </p>
-<%= link_to "More details on this actor", actor_path(actor) %>
-<hr>
+<div class="wrap row">
+  <h3> <%= actor.name %> (<%= actor.gender %>) <small><%= actor.age %> years old </small></h3>
+  <p> <%= actor.biography %> </p>
+  <%= link_to "More details on this actor", actor_path(actor) %>
+  <hr>
+</div>
 <% end %>

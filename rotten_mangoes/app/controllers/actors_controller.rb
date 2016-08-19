@@ -6,6 +6,7 @@ class ActorsController < ApplicationController
 
   def new
     @actor = Actor.new
+    @movies = Movie.all
   end
 
   def show

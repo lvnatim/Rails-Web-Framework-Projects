@@ -6,8 +6,9 @@ class Movie < ApplicationRecord
 
   mount_uploader :poster, PosterUploader
   has_and_belongs_to_many :actors
+  has_and_belongs_to_many :categories
   has_many :reviews
-  has_many :categories
+  paginates_per 5
 
   validates :title,
     presence: true

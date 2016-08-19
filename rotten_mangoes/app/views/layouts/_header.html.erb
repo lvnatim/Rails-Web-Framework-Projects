@@ -1,0 +1,22 @@
+<section class="header">
+    <div class="top-bar">
+      <div class="wrap">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"> RottenMangoes! </li>
+          <li><%= link_to "Movies", movies_path %></li>
+          <li><%= link_to "Actors", actors_path %></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+          <%= form_tag movies_path, method: :get do %>
+          <ul class="menu">
+            <li><%= text_field_tag :title_or_director, nil, placeholder: "Search movies" %></li>
+            <li><%= select_tag :runtime_in_minutes, options_for_select([["", ""], ["Under 90 minutes", 1], ["Between 90 and 120 minutes", 2], ["Over 120 minutes", 3]]) %></li>
+            <li><%= button_tag "Search!", class: :button %></li>
+          </ul>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</section>

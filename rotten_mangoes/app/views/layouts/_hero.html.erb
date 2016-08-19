@@ -1,0 +1,16 @@
+<section class="hero movies">
+  <div class="wrap">
+   <h2> Movies </h2>
+   <p> No phone, no lights, no motor car, not a single luxury. Like Robinson Crusoe it's primitive as can be. He's gaining' on you so you better look alive. He's busy revin' up his Powerful Mach 5. Straightnin' the curves. Flatnin the hills. Someday the mountain might get 'em but the law never will. No phone, no lights, no motor car, not a single luxury. Like Robinson Crusoe it's primitive as can be. He's gaining' on you so you better look alive. He's busy revin' up his Powerful Mach 5. Straightnin' the curves. Flatnin the hills. Someday the mountain might get 'em but the law never will. No phone, no lights, no motor car, not a single luxury. Like Robinson Crusoe it's primitive as can be. He's gaining' on you so you better look alive. He's busy revin' up his Powerful Mach 5. Straightnin' the curves. Flatnin the hills. Someday the mountain might get 'em but the law never will. </p>
+  <ul class="dropdown menu" data-dropdown-menu>
+    <li>
+      <a href="#" class="warning hollow button">Sort Movies By:</a>
+      <ul class="menu">
+        <li><%= link_to "Title", "/movies/sort/title", class: "warning hollow button"%> </li>
+        <li><%= link_to "Runtime", "/movies/sort/runtime_in_minutes", class: "warning hollow button" %></li>
+        <li><%= link_to "Release Date", "/movies/sort/release_date", class: "warning hollow button" %></li>
+      </ul>
+    </li>
+    <li><%= link_to "Add a movie!", new_movie_path, class: "success button" %></li>
+  </ul>
+</section>

@@ -6,6 +6,9 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.order(:id).page params[:page]
+    if params[:user_search_term] && !params[:user_search_term].empty?
+      @users = @users.param_search(params[:user_search_term])
+    end
   end
 
   def new

@@ -1,41 +1,8 @@
-<%= form_for @actor do |f| %>
-  <div>
-    <% if @actor.errors.any? %>
-      <div>
-        <%= pluralize(@actor.errors.count, "error") %> prevented this actor from submitted:
-        <ul>
-          <% @actor.errors.full_messages.each do |message| %>
-            <p> <%= message %> </p>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+<section class="main-body">
+  <div class="row wrap">
+    <div class="small-6 columns">
+    <h2> Add an Actor! </h2>
+    <%= render 'form' %>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :age %>
-    <%= f.number_field :age %>
-  </div>
-
-  <div>
-    <%= f.label "Male" %>
-    <%= f.radio_button(:gender, "M") %>
-    <%= f.label "Female" %>
-    <%= f.radio_button(:gender, "F") %>
-  </div>
-
-  <div>
-    <%= f.label :biography %>
-    <%= f.text_area :biography %>
-  </div>
-
-  <div>
-    <%= f.submit "Submit!" %>
-  </div>
-
-<% end %>
+</section>

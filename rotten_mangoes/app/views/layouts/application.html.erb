@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>RottenMangoes</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
   <body>
-    <div class="header">
-      <h1> Rotten Mangoes! </h1>
-      <ul style="list-style-type: none;">
-        <li> <%= link_to "Actors", actors_path %> </li>
-        <li> <%= link_to "Movies", movies_path %> </li>
-      </ul>
-    </div>
-    <hr>
-    <h1><% flash.each do |key, value| %>
-      <%= content_tag(:div, value) %>
-      <hr>
-    <% end %></h1>
+    <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>

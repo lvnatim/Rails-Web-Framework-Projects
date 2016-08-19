@@ -1,27 +1,11 @@
-<%= form_tag movies_path, method: :get do %>
-<!--   <div>
-  <%= label_tag :title %>
-  <%= text_field_tag :title %>
-  </div>
-  <div>
-  <%= label_tag :director %>
-  <%= text_field_tag :director %>
-  </div> -->
-  <div>
-    <%= label_tag :title_or_director %>
-    <%= text_field_tag :title_or_director %>
-  </div>
-  <div>
-  <%= label_tag :runtime_in_minutes %>
-  <%= select_tag :runtime_in_minutes, options_for_select([["", ""], ["Under 90 minutes", 1], ["Between 90 and 120 minutes", 2], ["Over 120 minutes", 3]]) %>
-  </div>
-  <%= submit_tag "Search!" %>
-<% end %>
-<br>
-
-Sort by: <%= link_to "Title", "/movies/sort/title" %> | <%= link_to "Runtime", "/movies/sort/runtime_in_minutes" %> | <%= link_to "Release Date", "/movies/sort/release_date" %>
-<p><%= link_to "Add a movie!", new_movie_path %></p>
-<hr>
-<% @movies.each do |movie| %>
+<%= render 'layouts/hero' %>
+<section class="main">
+  <% @movies.each do |movie| %>
   <%= render partial: 'movie', locals: {movie: movie} %>
-<% end %>
+  <% end %>
+  <div class="wrap row">
+    <div class="pagination-bar">
+      <%= paginate @movies %>
+    </div>
+  </div>
+</section>

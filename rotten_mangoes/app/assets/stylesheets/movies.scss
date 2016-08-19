@@ -1,0 +1,21 @@
+.movie-listing {
+  div > div > a > .poster {
+    border: solid 2px black;
+    max-height: 350px;
+  }
+  .text {
+    min-height: 350px;
+  }
+  margin: 30px 0px;
+}
+
+.comment {
+  border: grey 2px solid;
+  padding: 20px 30px;
+  margin: 10px;
+}
+
+.pagination-bar {
+  text-align: center;
+  margin: 0 auto;
+}

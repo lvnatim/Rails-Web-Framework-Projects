@@ -1,16 +1,46 @@
-<h2>Admin User Management (<%= link_to "Add user", new_admin_user_path %>) </h2>
+ <div class="main-body"> 
+  <div class="wrap">
+    <h2>Admin User Management (<%= link_to "Add user", new_admin_user_path %>) </h2>
 
-<% @users.each do |user| %>
-  <p><b>ID</b>: <%= user.id %> |
-  <b>Full Name</b>: <%= user.full_name %> |
-  <b>Email</b>: <%= user.email %> |
-  <b>Created At</b>: <%= user.created_at %> |
-  <b>Updated At</b>: <%= user.updated_at %> |
-  (<%= link_to "View as", spoof_path(user) %> |
-  <%= link_to "profile", user_path(user) %> |
-  <%= link_to "edit", edit_admin_user_path(user) %> |
-  <%= link_to "delete", admin_user_path(user), method: :delete, data: {confirm: "You sure?"} %>)</p>
-<% end %>
+    <%= form_tag admin_users_path, method: :get do %>
+      <ul class="menu">
+        <li><%= text_field_tag :user_search_term, nil, placeholder: "Search users" %></li>
+        <li><%= submit_tag "Search!", class: :button %></li>
+      </ul>
+    <% end %>
+    <br>
 
-<%= paginate @users %>
-<hr>
+    <table>
+      <thead>
+        <tr>
+          <th width="50">ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Actions </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.created_at %></td>
+          <td><%= user.updated_at %></td>
+          <td>
+            <%= link_to "spoof", spoof_path(user), class: "button" %>
+            <%= link_to "profile", user_path(user), class: "button" %>
+            <%= link_to "edit", edit_admin_user_path(user), class: "warning button" %>
+            <%= link_to "delete", admin_user_path(user), method: :delete, data: {confirm: "You sure?"}, class: "alert button" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @users %>
+    <hr>
+  </div>
+</div>

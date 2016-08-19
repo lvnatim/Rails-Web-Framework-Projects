@@ -1,0 +1,67 @@
+<%= form_for @actor do |f| %>
+  <div>
+    <% if @actor.errors.any? %>
+      <div>
+        <%= pluralize(@actor.errors.count, "error") %> prevented this actor from submitted:
+        <ul>
+          <% @actor.errors.full_messages.each do |message| %>
+            <p> <%= message %> </p>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+  </div>
+  <div>
+    <%= f.label "Male" %>
+    <%= f.radio_button(:gender, "M") %>
+    <%= f.label "Female" %>
+    <%= f.radio_button(:gender, "F") %>
+  </div>
+  <div>
+    <%= f.label :biography %>
+    <%= f.text_area :biography %>
+  </div>
+
+  <div id="association-hidden-fields">
+    <% @actor.movies.each do |movie| %>
+    <input id="<%= movie.title %>" type="hidden" name="movies[<%= movie.title %>]" value="<%= movie.id %>"/>
+    <% end %>
+  </div>
+
+  <div class="current-movies-display">
+    <ul id="current-movies-display-list">
+      <% @actor.movies.each do |movie| %>
+      <button class="button secondary hollow movie_button"><%= movie.title %></button>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="wrap row">
+    <div class="small-12 columns">
+    <div class="movies">
+      <input class="movie-search" id="search" name="search" placeholder="Start typing here" type="text" data-list=".list">
+      <ul class="list">
+        <% @movies.each do |movie| %>
+          <% unless @actor.movies.include?(movie) %>
+          <li data-movie-id="<%= movie.id%>" data-movie-id="<%= movie.id %>" ><%= movie.title %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit "Submit!" %>
+  </div>
+
+<% end %>
